@@ -1,0 +1,370 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'css/style.css'%}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+          integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css"
+          integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+          integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/about.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/about_responsive.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css'%}">
+    <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Montserrat', sans-serif;
+                text-decoration: none;
+                font-weight: 600;
+            }
+            .card {
+                background-color: #fff;
+                border-radius: 25px;
+                border: none;
+                position: relative;
+                margin-bottom: 60px;
+                box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
+            }
+            .l-bg-cherry {
+                background: linear-gradient(to right, #493240, #f09) !important;
+                color: #fff;
+            }
+
+            .l-bg-blue-dark {
+                background: linear-gradient(to right, #373b44, #4286f4) !important;
+                color: #fff;
+            }
+
+            .l-bg-green-dark {
+                background: linear-gradient(to right, #0a504a, #38ef7d) !important;
+                color: #fff;
+            }
+
+            .l-bg-orange-dark {
+                background: linear-gradient(to right, #a86008, #ffba56) !important;
+                color: #fff;
+            }
+
+            .card .card-statistic-3 .card-icon-large .fas, .card .card-statistic-3 .card-icon-large .far, .card .card-statistic-3 .card-icon-large .fab, .card .card-statistic-3 .card-icon-large .fal {
+                font-size: 120px;
+            }
+
+            .card .card-statistic-3 .card-icon {
+                text-align: center;
+                line-height: 50px;
+                margin-left: 15px;
+                color: #000;
+                position: absolute;
+                right: 30px;
+                top: 15px;
+                opacity: 0.2;
+            }
+
+            .l-bg-cyan {
+                background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+                color: #fff;
+            }
+
+            .l-bg-green {
+                background: linear-gradient(135deg, #23bdb8 0%, #43e794 100%) !important;
+                color: #fff;
+            }
+
+            .l-bg-orange {
+                background: linear-gradient(to right, #f9900e, #ffba56) !important;
+                color: #fff;
+            }
+
+            .l-bg-cyan {
+                background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+                color: #fff;
+            }
+
+            .btn {
+                padding: .45rem 1.5rem .3rem;
+                border-radius: 200px;
+            }
+
+            .gradient-custom {
+                border-radius: 8px;
+                background: linear-gradient(90deg, rgba(14,48,88,1) 0%, rgba(14,48,88,1) 100%);
+
+            }
+            .search-bar {
+                width: 100%;
+                max-width: 700px;
+                background: #eee;
+                display: flex;
+                border: 2px solid #0a294e;
+                align-items: center;
+                border-radius: 60px;
+                padding: 5px 20px;
+                backdrop-filter: blur(4px) saturate(180%);
+                margin: 1px 60%;
+                width: 800px;
+                float: center;
+                left:120px;
+                margin-bottom: 5px;
+            }
+            .search-bar input {
+                background: #eee;
+                flex: 1;
+                border: 0;
+                outline: none;
+                padding: 2px 30px;
+                font-size: 20px;
+                color: #cac7fff;
+                margin:3px 11px;
+                display: inline-block;
+                width: 150px;
+                float: left;
+                margin-bottom: 5px;
+
+            }
+            ::placeholder{
+                background: transparent;
+                font-size: 18px;
+            }
+            .search-bar button {
+                width: 60px;
+                border: 0;
+                border-radius: 50%;
+                height: 60px;
+                background: #eee;
+                cursor: pointer;
+                margin:5px 2px;
+                padding:0px;
+                text-align:center;
+                align:center;
+            }
+
+    </style>
+</head>
+<body style=" background: rgb(125,147,255);">
+<nav class="navbar navbar-expand-lg navbar-dark gradient-custom" style="background-color: #e3f2fd;">
+    <a class="navbar-brand text-center" href="{% url 'mylibrary:home' %}">
+        <div>
+            <i class="fa-solid fa-book-open-reader fa-flip"></i>
+        </div>
+        MYLIBRARY.
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0 from-inline my-3 text-center">
+            <li class="nav-item active">
+                <a class="nav-link text-center " href="{% url 'mylibrary:home' %}">
+                    <div>
+                        <i class="fas fa-home fa-lg mb-2"></i>
+                    </div>
+                    Home
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link text-center " href="{% url 'mylibrary:all_patrons' %}">
+                    <div>
+                        <i class="fas fa-right-left fa-lg mb-2"></i>
+                    </div>
+                    Issue Return
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link text-center" href="{% url 'cart:cart_details' %}">
+                    <div>
+                        <i class="fa-solid fa-cart-plus fa-lg mb-2"></i>
+                        {% if item_count > 0 %}
+                        <span class="badge rounded-pill badge-notification bg-dark">0{{item_count}}</span>
+                        {% endif %}
+                    </div>
+                    Add Cart
+                </a>
+            </li>
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle text-center" id="NavbarR__Dropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div>
+                        <i class="fa-solid fa-users fa-lg mb-2"></i>
+                        <span class="badge rounded-pill badge-notification bg-dark">{{ patron_count }}</span>
+                    </div>
+                    Patrons
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% for i in navbar_patrons %}
+                    <a class="dropdown-item text-uppercase" href="{% url 'search_app:issue_patron' i.id %}"
+                       style="font-weight: 600;">
+                        {{ i.name }}{% if user.is_authenticated and user.email == i.gmail %} (main){% endif %}
+                        [{{ i.card_no }}]
+                    </a>
+                    {% endfor %}
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'mylibrary:all_patrons' %}" style="font-weight: 600;">ALL
+                        PATRONS</a>
+                    <a class="dropdown-item" href="{% url 'mylibrary:add_patron' %}" style="font-weight: 600;"><b
+                            class="text-primary">ADD PATRON</b></a>
+                </div>
+            </li>
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle text-center" id="navbar_dropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div>
+                        <i class="fa-solid fa-bars fa-lg mb-2"></i>
+                        <span class="badge rounded-pill badge-notification bg-dark">{{category_count}}</span>
+                    </div>
+                    Category
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% for category in links %}
+                    <div class="d-flex align-items-left">
+                        <tr>
+                            <td>
+                                <a class="dropdown-item text-uppercase  ml-1" href="{{ category.get_url }}"><b>
+                                    {{ category.name }}</b></a>
+                                <a href="{% url 'search_app:delete_category' category.id %}" class="ml-2 mb-2 "><i
+                                        class=" fa-solid fa-trash fa-lg text-danger"></i></a>
+                            </td>
+                        </tr>
+                    </div>
+                    {% endfor %}
+
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'mylibrary:all_book_category' %}" style="font-weight: 600;">ALL
+                        CATEGORIES</a>
+                    <a class="dropdown-item" href="{% url 'search_app:add_category' %}" style="font-weight: 600;"><b class="text-primary">ADD CATEGORY</b></a>
+                </div>
+            </li>
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle text-center" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <div>
+                        <i class="fa fa-book fa-lg mb-2"></i>
+                        <span class="badge rounded-pill badge-notification bg-dark">{{book_count}}</span>
+                    </div>
+                    New Books
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% for book in nav_books %}
+                    <a class="dropdown-item text-uppercase" href="{% url 'mylibrary:detail' book.id %}"
+                       style="font-weight: 600;">{{book.name}} [{{book.primary_number}}]</a>
+                    {% endfor %}
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'mylibrary:all_book_category' %}" style="font-weight: 600;">ALL
+                        BOOKS</a>
+                    <a class="dropdown-item" href="{% url 'mylibrary:add_book' %}" style="font-weight: 600;"><b
+                            class="text-primary">ADD BOOKS</b></a>
+                </div>
+            </li>
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle text-center" id="navbar__dropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div>
+                        <i class="fa-solid fa-newspaper fa-lg mb-2"></i>
+                        <span class="badge rounded-pill badge-notification bg-dark">0{{ news_count }}</span>
+                    </div>
+                    News Paper
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% for newspaper in news %}
+                    <a class="dropdown-item text-uppercase" href="{{ newspaper.pdf.url }}" style="font-weight: 600;">
+                        {{newspaper.name}}</a>
+                    {% endfor %}
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'mylibrary:newspaper' %}" style="font-weight: 600;">ALL
+                        NEWSPAPER</a>
+                    <a class="dropdown-item" href="{% url 'search_app:add_newspaper' %}" style="font-weight: 600;"><b
+                            class="text-primary">ADD NEWSPAPER</b></a>
+                </div>
+            </li>
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle text-center" id="navbar__dropdowns" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div>
+                        <i class="fas fa-bell fa-lg mb-2"></i>
+                        <span class="badge rounded-pill badge-notification bg-dark">0{{ message_count }}</span>
+                    </div>
+                    Notifications
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% for notify in message %}
+                    <a class="dropdown-item text-uppercase" href="{% url 'mylibrary:program' notify.id %}"
+                       style="font-weight: 600;">{{ notify.name}}</a>
+                    {% endfor %}
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'search_app:all_programmes' %}" style="font-weight: 600;">ALL
+                        NOTIFICATIONS</a>
+                    <a class="dropdown-item" href="{% url 'search_app:add_notify' %}" style="font-weight: 600;"><b
+                            class="text-primary">ADD NOTIFICATIONS</b></a>
+                </div>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link text-center" href="{% url 'search_app:all_history' %}">
+                    <div>
+                        <i class="fa-sharp fa-solid fa-file-waveform fa-lg mb-2"></i>
+                    </div>
+                    History
+                </a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item active">
+                <a class="nav-link text-center" href="{% url 'search_app:superuser' %}">
+                    <div>
+                        <i class="fa-solid fa-lg fa-user fa-beat mb-2"></i>
+                    </div>
+                    <b style="text-transform: uppercase;">{{user.username}}</b>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link text-center" href="{% url 'mylibrary:logout' %}">
+                    <div>
+                        <i class="fa-solid fa-lg fa-right-from-bracket mb-2"></i>
+                    </div>
+                    Logout
+                </a>
+            </li>
+            {% else %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'mylibrary:login' %}">
+                    <div>
+                        <i class="fa-solid fa-lg fa-right-from-bracket fa-flip"></i>
+                    </div>
+                    Login
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<script>
+        const genNumber = () => {
+          document.querySelector("div").style.setProperty("--percent", Math.random());
+        };
+        setInterval(genNumber, 2000);
+        setTimeout(genNumber);
+
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

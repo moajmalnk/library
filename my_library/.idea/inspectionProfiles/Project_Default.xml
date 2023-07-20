@@ -1,0 +1,113 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="1">
+            <item index="0" class="java.lang.String" itemvalue="size" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="11">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="a" />
+            <item index="7" class="java.lang.String" itemvalue="img" />
+            <item index="8" class="java.lang.String" itemvalue="center" />
+            <item index="9" class="java.lang.String" itemvalue="tr" />
+            <item index="10" class="java.lang.String" itemvalue="div" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="W292" />
+          <option value="E111" />
+          <option value="E722" />
+          <option value="E501" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N801" />
+          <option value="N802" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyShadowingBuiltinsInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredNames">
+        <list>
+          <option value="id" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnreachableCodeInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="main.Assistant.root" />
+          <option value="main.Assistant.label" />
+          <option value="main.Assistant.creat_file" />
+          <option value="django.core.checks.messages.info" />
+          <option value="movie_app.models.Movie.objects" />
+          <option value="todo_app.models.Task.objects" />
+          <option value="e_shopee.models.Product.objects" />
+          <option value="e_shopee.models.Category.objects" />
+          <option value="django.db.models.fields.related.ForeignKey.slug" />
+          <option value="cart.models.Cart.objects" />
+          <option value="cart.models.CartItem.*" />
+          <option value="cart.models.Cart.*" />
+          <option value="restapp.models.Task.objects" />
+          <option value="pang_app.models.Medical.objects" />
+          <option value="pang_app.models.Blood_donor.objects" />
+          <option value="pang_app.models.Clinics.*" />
+          <option value="pang_app.models.Doctor.*" />
+          <option value="pang_app.models.Paliative_care.*" />
+          <option value="pang_app.models.Ambulance.*" />
+          <option value="pang_app.models.Eye_care.*" />
+          <option value="pang_app.models.Optical.*" />
+          <option value="pang_app.models.Hospital.*" />
+          <option value="pang_app.models.Medical_college.*" />
+          <option value="pang_app.models.Homeopathy.*" />
+          <option value="pang_app.models.Ayurvedha.*" />
+          <option value="pang_app.models.Medical_lab.*" />
+          <option value="pang_app.models.Bakery_Coolbar.*" />
+          <option value="pang_app.models.Vegetable_Fruit.*" />
+          <option value="pang_app.models.Fancy_Gift_Footwear.*" />
+          <option value="pang_app.models.Textile_Readymade.*" />
+          <option value="pang_app.models.Stationary_Traders.*" />
+          <option value="banking.models.Branch.*" />
+          <option value="banking.models.City.*" />
+          <option value="banking.models.State.*" />
+          <option value="banking.models.Street.*" />
+          <option value="django.core.checks.messages.*" />
+          <option value="fedbank.models.City.*" />
+          <option value="fedbank.models.BRANCH.objects" />
+          <option value="fedbank.models.Branch.*" />
+          <option value="movie_app.models.More.*" />
+          <option value="movie_app.models.Language.*" />
+          <option value="online_library.models.Book_details.*" />
+          <option value="online_library.models.Profile.*" />
+          <option value="online_library.models.Patron.*" />
+          <option value="django.db.models.fields.related.ForeignKey.*" />
+          <option value="online_library.models.Category.*" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

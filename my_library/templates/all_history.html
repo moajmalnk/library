@@ -1,0 +1,349 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<title>{% block title %}History{% endblock %}</title>
+
+<style>
+    /* Add your custom styles here */
+    .color-1 { background-color: #FF3366; }
+    .color-2 { background-color: #FF9900; }
+    .color-3 { background-color: #FFCC00; }
+    .color-4 { background-color: #66CC00; }
+    .color-5 { background-color: #00CCCC; }
+    .color-6 { background-color: #3399FF; }
+    .color-7 { background-color: #9933FF; }
+    .color-8 { background-color: #FF33CC; }
+    .color-9 { background-color: #FF6666; }
+    .color-10 { background-color: #FFCC99; }
+    .color-11 { background-color: #99CC99; }
+    .color-12 { background-color: #66CCCC; }
+</style>
+
+{% block body %}
+<body class="l-bg-green ">
+<div class="col-md-12" style="border-radius: 1px;">
+    <div class="row">
+        <div class="col-md-12 text-center"><br><br>
+            <h1 class="text-dark"><b>HISTORY</b></h1><br>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <a href="{% url 'search_app:history' %}?type=all_books" style="text-decoration: none;">
+                <div class="card l-bg-cherry">
+                    <div class="card-statistic-3 p-5">
+                        <div class="card-icon card-icon-large"><i class="fas fa-book"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0 text-center"><b>TOTAL BOOKS</b></h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    {{ book_count }}K
+                                </h2>
+                            </div>
+                            <div class="col-4 text-right">
+                                <span>13% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1" data-height="8" style="height: 8px;">
+                            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar l-bg-cyan"
+                                 data-width="25%" role="progressbar" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <a href="{% url 'search_app:history' %}?type=returned_books" style="text-decoration: none;">
+                <div class="card l-bg-blue-dark">
+                    <div class="card-statistic-3 p-5">
+                        <div class="card-icon card-icon-large"><i class="fas fa-book"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0 text-center"><b>RETURNED BOOKS</b></h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    {{t_returned_books_count}}K
+                                </h2>
+                            </div>
+                            <div class="col-4 text-right">
+                                <span>{{ t_returned_books_count }}% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1" data-height="8" style="height: 8px;">
+                            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="30"
+                                 class="progress-bar l-bg-green" data-width="30%" role="progressbar"
+                                 style="width: {{ t_returned_books_count }}%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <a href="{% url 'search_app:history' %}?type=issued_books" style="text-decoration: none;">
+                <div class="card l-bg-green text-white">
+                    <div class="card-statistic-3 p-5">
+                        <div class="card-icon card-icon-large"><i class="fas fa-book"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0 text-center"><b>ISSUED BOOKS</b></h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    {{t_issued_books_count}}K
+                                </h2>
+                            </div>
+                            <div class="col-4 text-right">
+                                <span>{{t_issued_books_count}}% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1" data-height="8" style="height: 8px;">
+                            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar l-bg-orange"
+                                 data-width="50%" role="progressbar" style="width: {{t_issued_books_count}}%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <a href="{% url 'search_app:history' %}?type=languages" style="text-decoration: none;">
+                <div class="card bg-secondary text-light">
+                    <div class="card-statistic-3 p-5">
+                        <div class="card-icon card-icon-large"><i class="fas fa-language"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0 text-center"><b>LANGUAGES</b></h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    {{lang_count}}K
+                                </h2>
+                            </div>
+                            <div class="col-4 text-right">
+                                <span>{{lang_count}}% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1" data-height="8" style="height: 8px;">
+                            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar l-bg-cyan"
+                                 data-width="25%" role="progressbar" style="width: {{lang_count}}%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <a href="{% url 'search_app:history' %}?type=fines" style="text-decoration: none;">
+                <div class="card bg-success text-white">
+                    <div class="card-statistic-3 p-5">
+                        <div class="card-icon card-icon-large"><i class="fas fa-rupee"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0 text-center"><b>FINES</b></h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    <i class="fas fa-rupee"></i> {{ total_patron_fine }}
+                                </h2>
+                            </div>
+                            <div class="col-4 text-right">
+                                <span>{{percentage_fine}}% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1" data-height="8" style="height: 8px;">
+                            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar l-bg-cyan"
+                                 data-width="25%" role="progressbar" style="width: {{percentage_fine}}%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <a href="{% url 'search_app:history' %}?type=patrons" style="text-decoration: none;">
+                <div class="card bg-info text-white">
+                    <div class="card-statistic-3 p-5">
+                        <div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0 text-center"><b>PATRONS</b></h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    {{ patron_count }}K
+                                </h2>
+                            </div>
+                            <div class="col-4 text-right">
+                                <span>{{ patron_percentage }}% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1" data-height="8" style="height: 8px;">
+                            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="30"
+                                 class="progress-bar l-bg-green" data-width="30%" role="progressbar"
+                                 style="width: {{ patron_percentage }}%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-3 col-lg-6 text-center">
+            <a href="{% url 'search_app:superuser' %}" style="text-decoration: none;">
+                <div class="card bg-danger text-white">
+                    <div class="card-statistic-3 p-5">
+                        <div class="card-icon card-icon-large"><i class="fas fa-user"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0 text-center"><b>SUPER ADMIN</b></h5>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <h5 class="text-uppercase text-center">
+                                {% if user.is_authenticated %}
+                                {{ user.username }}(main)
+                                {% endif %}
+                            </h5>
+                        </div>
+                        <div class="col-12 text-center">
+                            {% for patron in patrons %}
+                            <h5>
+                                <b>
+                                    {% if user.is_authenticated and user.email == patron.gmail %} {{ patron.card_no }}{% endif %}
+                                </b>
+                            </h5>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <a href="{% url 'search_app:history' %}?type=categories" style="text-decoration: none;">
+                <div class="card bg-primary text-white">
+                    <div class="card-statistic-3 p-5">
+                        <div class="card-icon card-icon-large"><i class="fas fa-bars"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0 text-center"><b>CATEGORIES</b></h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    {{ category_count }}K
+                                </h2>
+                            </div>
+                            <div class="col-4 text-right">
+                                <span>{{ category_count }}% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1" data-height="8" style="height: 8px;">
+                            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar l-bg-cyan"
+                                 data-width="25%" role="progressbar" style="width: {{ category_count }}%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <a href="{% url 'search_app:history' %}?type=notifications" style="text-decoration: none; ">
+                <div class="card bg-dark text-white">
+                    <div class="card-statistic-3 p-5">
+                        <div class="card-icon card-icon-large"><i class="fas fa-message"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0 text-center"><b>NOTIFICATIONS</b></h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    {{notify_count}}K
+                                </h2>
+                            </div>
+                            <div class="col-4 text-right">
+                                <span>{{notify_count}}% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1" data-height="8" style="height: 8px;">
+                            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar l-bg-cyan"
+                                 data-width="25%" role="progressbar" style="width: {{notify_count}}%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <a href="{% url 'search_app:history' %}?type=newspaper" style="text-decoration: none;">
+                <div class="card bg-warning text-dark">
+                    <div class="card-statistic-3 p-5">
+                        <div class="card-icon card-icon-large"><i class="fas fa-newspaper"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0 text-center"><b>NEWSPAPERS</b></h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    {{ news_count }}K
+                                </h2>
+                            </div>
+                            <div class="col-4 text-right">
+                                <span>{{ news_count }}% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1" data-height="8" style="height: 8px;">
+                            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="30"
+                                 class="progress-bar l-bg-green" data-width="30%" role="progressbar"
+                                 style="width: {{ news_count }}%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <a href="{% url 'search_app:history' %}?type=cart" style="text-decoration: none;">
+                <div class="card l-bg-green-dark text-white">
+                    <div class="card-statistic-3 p-5">
+                        <div class="card-icon card-icon-large"><i class="fas fa-cart-plus"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0 text-center"><b>CART</b></h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    {{ cart_count }}K
+                                </h2>
+                            </div>
+                            <div class="col-4 text-right">
+                                <span>{{ cart_count }}% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1" data-height="8" style="height: 8px;">
+                            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar l-bg-orange"
+                                 data-width="50%" role="progressbar" style="width: {{ cart_count }}%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <a href="{% url 'search_app:history' %}?type=other" style="text-decoration: none;">
+                <div class="card l-bg-orange text-white">
+                    <div class="card-statistic-3 p-5">
+                        <div class="card-icon card-icon-large"><i class=""></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0 text-center"><b>OTHER</b></h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    O
+                                </h2>
+                            </div>
+                            <div class="col-4 text-right">
+                                <span>0% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1" data-height="8" style="height: 8px;">
+                            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar l-bg-cyan"
+                                 data-width="25%" role="progressbar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

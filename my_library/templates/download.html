@@ -1,0 +1,68 @@
+{% load static %}
+<html lang="en">
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="card col-md-12 ">
+                <br>
+                <div class="card">
+                    <br>
+                    <h4><b>{{ msg.name }}</b></h4>
+                    <br>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-content">
+                                <h4 class="card-title">On</h4>
+                                <p class="text-uppercase">{{ msg.on }}</p>
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Location</h4>
+                                <p class="text-uppercase">{{ msg.location }}</p>
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Inauguration</h4>
+                                <p class="text-uppercase">{{ msg.inauguration }}</p>
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Welcome speech</h4>
+                                <p class="text-uppercase">{{ msg.welcome_speech }}</p>
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Presidential Speech</h4>
+                                <p class="text-uppercase">{{ msg.presidential_speech }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-content">
+                                <h4 class="card-title">Greetings</h4>
+                                <p class="text-uppercase">{{ msg.greetings }}</p>
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Special Speech</h4>
+                                <p class="text-uppercase">{{ msg.special_speech }}</p>
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Speech</h4>
+                                <p class="text-uppercase">{{ msg.speech }}</p>
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Song</h4>
+                                <p class="text-uppercase">{{ msg.song }}</p>
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Vote of Thanks</h4>
+                                <p class="text-uppercase">{{ msg.vote_of_thanks }}</p>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/script.js'%}"></script>
+</body>
+</html>

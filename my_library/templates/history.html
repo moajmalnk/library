@@ -1,0 +1,675 @@
+{% extends 'base.html' %}
+<title>{% block title %}history{% endblock %}</title>
+{% block body %}
+{% load custom_filters %}
+{% if t_issued_books %}
+<h3 class="text-center" style="padding: 10px 100px;">
+    <b class="text-white text-uppercase">Issued Books</b>
+</h3>
+<div class="col-md-12">
+    <div class="col-md-12">
+        <div class="card col-md-12 p-2">
+            <table class="table">
+                <thead>
+                <tr class="text-uppercase text-center">
+                    <th><b>BOOK NAME</b></th>
+                    <th><b>Issued To</b></th>
+                    <th><b>ISSUE DATE</b></th>
+                    <th><b>RETURN DATE</b></th>
+                    <th><b>TOTAL FINE</b></th>
+                    <th><b>PAID</b></th>
+                    <th><b>BALANCE</b></th>
+                </tr>
+                </thead>
+                <tbody class="text-uppercase text-center">
+                {% for issued_book in t_issued_books %}
+                <tr>
+                    <td>
+                        {{ issued_book.book.name }}
+                        {% for book in cbook %}
+                        {% if book.name == issued_book.book.name %}
+                        ({{ book.primary_number }})
+                        {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {{ issued_book.patron }}
+                        {% for patron in patron %}
+                        {% if patron.name == issued_book.patron.name %}
+                        ({{ patron.card_no }})
+                        {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ issued_book.issue_date }}</td>
+                    <td>{{ issued_book.return_date }}</td>
+                    {% for patron in patron %}
+                    {% if patron.name == issued_book.patron.name %}
+                    <td><i class="fa fa-rupee"></i>{{ patron.fine }}</td>
+                    <td><i class="fa fa-rupee"></i>{{ patron.paid }}</td>
+                    <td><i class="fa fa-rupee"></i>{{ issued_book.total }}</td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if t_returned_books %}
+<h3 class="text-center" style="padding: 10px 100px;">
+    <b class="text-white text-uppercase">Returned Books</b>
+</h3>
+<div class="col-md-12">
+    <div class="col-md-12">
+        <div class="card col-md-12 p-2">
+            <table class="table">
+                <thead>
+                <tr class="text-uppercase text-center">
+                    <th><b>BOOK NAME</b></th>
+                    <th><b>Returned By</b></th>
+                    <th><b>ISSUE DATE</b></th>
+                    <th><b>RETURN DATE</b></th>
+                    <th><b>TOTAL FINE</b></th>
+                    <th><b>PAID</b></th>
+                    <th><b>BALANCE</b></th>
+                </tr>
+                </thead>
+                <tbody class="text-uppercase text-center">
+                {% for returned_book in t_returned_books %}
+                <tr>
+                    <td>
+                        {{ returned_book.book.name }}
+                        {% for book in cbook %}
+                        {% if book.name == returned_book.book.name %}
+                        ({{ book.primary_number }})
+                        {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {{ returned_book.patron }}
+                        {% for patron in patron %}
+                        {% if patron.name == returned_book.patron.name %}
+                        ({{ patron.card_no }})
+                        {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ returned_book.issue_date }}</td>
+                    <td>{{ returned_book.return_date }}</td>
+                    {% for patron in patron %}
+                    {% if patron.name == returned_book.patron.name %}
+                    <td><i class="fa fa-rupee"></i>{{ patron.fine }}</td>
+                    <td><i class="fa fa-rupee"></i>{{ patron.paid }}</td>
+                    <td><i class="fa fa-rupee"></i>{{ patron.fine }}</td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if t_patrons %}
+<h3 class="text-center" style="padding: 10px 100px;">
+    <b class="text-white text-uppercase">Patrons</b>
+</h3>
+<div class="col-md-12">
+    <div class="col-md-12">
+        <div class="card col-md-12 p-2">
+            <table class="table">
+                <thead>
+                <tr class="text-uppercase text-center">
+                    <th><b>NAME</b></th>
+                    <th><b>Card No</b></th>
+                    <th><b>Gmail</b></th>
+                    <th><b>MOBILE NO</b></th>
+                    <th><b>TOTAL FINE</b></th>
+                    <th><b>PAID</b></th>
+                    <th><b>BALANCE</b></th>
+                </tr>
+                </thead>
+                <tbody class="text-uppercase text-center">
+                {% for t_patron in t_patrons %}
+                <tr>
+                    <td>
+                        {{ t_patron.name }}
+                    </td>
+                    <td>
+                        {{ t_patron.card_no }}
+                    </td>
+                    <td>{{ t_patron.gmail }}</td>
+                    <td>{{ t_patron.phone }}</td>
+                    <td><i class="fa fa-rupee"></i> {{ t_patron.fine }}</td>
+                    <td><i class="fa fa-rupee"></i> {{ t_patron.paid }}</td>
+                    <td><i class="fa fa-rupee"></i> {{ t_patron.fine }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if t_books %}
+<h3 class="text-center" style="padding: 10px 100px;">
+    <b class="text-white text-uppercase">Books</b>
+</h3>
+<div class="col-md-12">
+    <div class="col-md-12">
+        <div class="card col-md-12 p-2">
+            <table class="table">
+                <thead>
+                <tr class="text-uppercase text-center">
+                    <th><b>primary number</b></th>
+                    <th><b>name</b></th>
+                    <th><b>author</b></th>
+                    <th><b>category</b></th>
+                    <th><b>language</b></th>
+                    <th><b>price</b></th>
+                    <th><b>stock</b></th>
+                    <th><b>updated</b></th>
+                    <th><b>available</b></th>
+                </tr>
+                </thead>
+                <tbody class="text-uppercase text-center">
+                {% for t_book in t_books %}
+                <tr>
+                    <td>{{ t_book.primary_number }}</td>
+                    <td>{{ t_book.name }}</td>
+                    <td>{{ t_book.author }}</td>
+                    <td>
+                        {{ t_book.category }}
+                    </td>
+                    <td>{{ t_book.lang }}</td>
+                    <td><i class="fa fa-rupee"></i> {{ t_book.price }}</td>
+                    <td>{{ t_book.stock }}.00</td>
+                    <td>{{ t_book.updated }}</td>
+                    <td>
+                        {% if not t_cart.available %}
+                        <i class="fa fa-check text-success"></i>
+                        {% else %}
+                        <i class="fa fa-xmark text-danger"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if t_categories %}
+<h3 class="text-center" style="padding: 10px 100px;">
+    <b class="text-white text-uppercase">Categories</b>
+</h3>
+<div class="col-md-12">
+    <div class="col-md-12">
+        <div class="card col-md-12 p-2">
+            <table class="table">
+                <thead>
+                <tr class="text-uppercase text-center">
+                    <th><b>No</b></th>
+                    <th><b>Name</b></th>
+                    <th><b>UPDATE</b></th>
+                </tr>
+                </thead>
+                <tbody class="text-uppercase text-center">
+                {% for t_cat in t_categories %}
+                <tr>
+                    <td>
+                        {{ forloop.counter }}
+                    </td>
+                    <td id="category-name-{{ t_cat.id }}">
+                        {{ t_cat.name }}
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-primary edit-button" data-category-id="{{ t_cat.id }}">Edit</button>
+                        <button class="btn btn-sm btn-success save-button" data-category-id="{{ t_cat.id }}" style="display: none;">Save</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+<script>
+  // JavaScript code to handle editing and saving category names
+  document.addEventListener("DOMContentLoaded", function() {
+    var editableElements = document.getElementsByClassName("editable");
+    var editButtons = document.getElementsByClassName("edit-button");
+    var saveButtons = document.getElementsByClassName("save-button");
+
+    for (var i = 0; i < editButtons.length; i++) {
+      editButtons[i].addEventListener("click", function() {
+        var categoryId = this.getAttribute("data-category-id");
+        var categoryNameElement = document.getElementById("category-name-" + categoryId);
+        categoryNameElement.contentEditable = true;
+        categoryNameElement.focus();
+
+        this.style.display = "none";
+        var saveButton = document.querySelector(".save-button[data-category-id='" + categoryId + "']");
+        saveButton.style.display = "inline-block";
+      });
+    }
+
+    for (var i = 0; i < saveButtons.length; i++) {
+      saveButtons[i].addEventListener("click", function() {
+        var categoryId = this.getAttribute("data-category-id");
+        var categoryNameElement = document.getElementById("category-name-" + categoryId);
+        categoryNameElement.contentEditable = false;
+
+        this.style.display = "none";
+        var editButton = document.querySelector(".edit-button[data-category-id='" + categoryId + "']");
+        editButton.style.display = "inline-block";
+
+        var newCategoryName = categoryNameElement.innerText;
+
+        // Perform AJAX request to save the updated category name
+        // Replace the following code with your AJAX request logic to update the category name on the server
+        // Example:
+        // fetch('/update-category/' + categoryId + '/', {
+        //   method: 'POST',
+        //   body: JSON.stringify({ name: newCategoryName }),
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   }
+        // })
+        //   .then(response => response.json())
+        //   .then(data => {
+        //     console.log('Category name updated successfully');
+        //   })
+        //   .catch(error => {
+        //     console.error('Error updating category name:', error);
+        //   });
+      });
+    }
+  });
+</script>
+{% endif %}
+{% if t_lang %}
+<h3 class="text-center" style="padding: 10px 100px;">
+    <b class="text-white text-uppercase">Languages</b>
+</h3>
+<div class="col-md-12">
+    <div class="col-md-12">
+        <div class="card col-md-12 p-2">
+            <table class="table">
+                <thead>
+                <tr class="text-uppercase text-center">
+                    <th><b>No</b></th>
+                    <th><b>Name</b></th>
+                    <th><b>Update</b></th>
+                </tr>
+                </thead>
+                <tbody class="text-uppercase text-center">
+                {% for language in t_lang %}
+                <tr>
+                    <td>
+                        {{ forloop.counter }}
+                    </td>
+                    <td>
+                        <p id="language-name-{{ language.id }}" class="editable">{{ language.name }}</p>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-primary edit-button" data-language-id="{{ language.id }}">Edit</button>
+                        <button class="btn btn-sm btn-success save-button" data-language-id="{{ language.id }}" style="display: none;">Save</button>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+  // JavaScript code to handle editing and saving language names
+  document.addEventListener("DOMContentLoaded", function() {
+    var editableElements = document.getElementsByClassName("editable");
+    var editButtons = document.getElementsByClassName("edit-button");
+    var saveButtons = document.getElementsByClassName("save-button");
+
+    for (var i = 0; i < editButtons.length; i++) {
+      editButtons[i].addEventListener("click", function() {
+        var languageId = this.getAttribute("data-language-id");
+        var languageNameElement = document.getElementById("language-name-" + languageId);
+        languageNameElement.contentEditable = true;
+        languageNameElement.focus();
+
+        this.style.display = "none";
+        var saveButton = document.querySelector(".save-button[data-language-id='" + languageId + "']");
+        saveButton.style.display = "inline-block";
+      });
+    }
+
+    for (var i = 0; i < saveButtons.length; i++) {
+      saveButtons[i].addEventListener("click", function() {
+        var languageId = this.getAttribute("data-language-id");
+        var languageNameElement = document.getElementById("language-name-" + languageId);
+        languageNameElement.contentEditable = false;
+
+        this.style.display = "none";
+        var editButton = document.querySelector(".edit-button[data-language-id='" + languageId + "']");
+        editButton.style.display = "inline-block";
+
+        var newLanguageName = languageNameElement.innerText;
+
+        // Perform AJAX request to save the updated language name
+        // Replace the following code with your AJAX request logic to update the language name on the server
+        // Example:
+        // fetch('/update-language/' + languageId + '/', {
+        //   method: 'POST',
+        //   body: JSON.stringify({ name: newLanguageName }),
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   }
+        // })
+        //   .then(response => response.json())
+        //   .then(data => {
+        //     console.log('Language name updated successfully');
+        //   })
+        //   .catch(error => {
+        //     console.error('Error updating language name:', error);
+        //   });
+      });
+    }
+  });
+</script>
+{% endif %}
+{% if t_news %}
+<h3 class="text-center" style="padding: 10px 100px;">
+    <b class="text-white text-uppercase">Newspaper</b>
+</h3>
+<div class="col-md-12">
+    <div class="col-md-12">
+        <div class="card col-md-12 p-2">
+            <table class="table">
+                <thead>
+                <tr class="text-uppercase text-center">
+                    <th><b>No</b></th>
+                    <th><b>Name</b></th>
+                    <th><b>PDF</b></th>
+                    <th><b>Edit</b></th>
+                </tr>
+                </thead>
+                <tbody class="text-uppercase text-center">
+                {% for t_news in t_news %}
+                <tr>
+                    <td>
+                        {{ forloop.counter }}
+                    </td>
+                    <td>
+                        <span id="news-name-{{ t_news.id }}" class="editable">{{ t_news.name }}</span>
+                    </td>
+                    <td>
+                        <a href="{{ t_news.pdf.url }}">PDF HERE</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-primary edit-button" data-news-id="{{ t_news.id }}">Edit</button>
+                        <button class="btn btn-sm btn-success save-button" data-news-id="{{ t_news.id }}" style="display: none;">Save</button>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+  // JavaScript code to handle editing and saving news names
+  document.addEventListener("DOMContentLoaded", function() {
+    var editableElements = document.getElementsByClassName("editable");
+    var editButtons = document.getElementsByClassName("edit-button");
+    var saveButtons = document.getElementsByClassName("save-button");
+
+    for (var i = 0; i < editButtons.length; i++) {
+      editButtons[i].addEventListener("click", function() {
+        var newsId = this.getAttribute("data-news-id");
+        var newsNameElement = document.getElementById("news-name-" + newsId);
+        newsNameElement.contentEditable = true;
+        newsNameElement.focus();
+
+        this.style.display = "none";
+        var saveButton = document.querySelector(".save-button[data-news-id='" + newsId + "']");
+        saveButton.style.display = "inline-block";
+      });
+    }
+
+    for (var i = 0; i < saveButtons.length; i++) {
+      saveButtons[i].addEventListener("click", function() {
+        var newsId = this.getAttribute("data-news-id");
+        var newsNameElement = document.getElementById("news-name-" + newsId);
+        newsNameElement.contentEditable = false;
+
+        this.style.display = "none";
+        var editButton = document.querySelector(".edit-button[data-news-id='" + newsId + "']");
+        editButton.style.display = "inline-block";
+
+        var newNewsName = newsNameElement.innerText;
+
+        // Perform AJAX request to save the updated news name
+        // Replace the following code with your AJAX request logic to update the news name on the server
+        // Example:
+        // fetch('/update-news/' + newsId + '/', {
+        //   method: 'POST',
+        //   body: JSON.stringify({ name: newNewsName }),
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   }
+        // })
+        //   .then(response => response.json())
+        //   .then(data => {
+        //     console.log('News name updated successfully');
+        //   })
+        //   .catch(error => {
+        //     console.error('Error updating news name:', error);
+        //   });
+      });
+    }
+  });
+</script>
+{% endif %}
+{% if t_notify %}
+<h3 class="text-center" style="padding: 10px 100px;">
+    <b class="text-white text-uppercase">Notifications</b>
+</h3>
+<div class="col-md-12">
+    <div class="col-md-12">
+        <div class="card col-md-12 p-2">
+            <table class="table">
+                <thead>
+                <tr class="text-uppercase text-center">
+                    <th><b>name</b></th>
+                    <th><b>date</b></th>
+                    <th><b>location</b></th>
+                    <th><b>inauguration</b></th>
+                    <th><b>speech</b></th>
+                    <th><b>song</b></th>
+                    <th><b>greetings</b></th>
+                    <th><b>special speech</b></th>
+                    <th><b>welcome speech</b></th>
+                    <th><b>presidential speech</b></th>
+                    <th><b>vote of thanks</b></th>
+                </tr>
+                </thead>
+                <tbody class="text-uppercase text-center">
+                {% for t_notify in t_notify %}
+                <tr>
+                    <td>{{ t_notify.name }}</td>
+                    <td>{{ t_notify.on }}</td>
+                    <td>{{ t_notify.location }}</td>
+                    <td>{{ t_notify.inauguration }}</td>
+                    <td>{{ t_notify.speech }}</td>
+                    <td>{{ t_notify.song }}</td>
+                    <td>{{ t_notify.greetings }}</td>
+                    <td>{{ t_notify.special_speech }}</td>
+                    <td>{{ t_notify.welcome_speech }}</td>
+                    <td>{{ t_notify.presidential_speech }}</td>
+                    <td>{{ t_notify.vote_of_thanks }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if t_cart %}
+<h3 class="text-center" style="padding: 10px 100px;">
+    <b class="text-white text-uppercase">Cart items</b>
+</h3>
+<div class="col-md-12">
+    <div class="col-md-12">
+        <div class="card col-md-12 p-2">
+            <table class="table">
+                <thead>
+                <tr class="text-uppercase text-center">
+                    <th><b>no</b></th>
+                    <th><b>book</b></th>
+                    <th><b>price</b></th>
+                    <th><b>quantity</b></th>
+                    <th><b>sub total</b></th>
+                </tr>
+                </thead>
+                <tbody class="text-uppercase text-center">
+                {% for t_cart in t_cart %}
+                <tr>
+                    <td>
+                        {{ forloop.counter }}
+                    </td>
+                    <td>
+                        {{ t_cart.book }}
+                    </td>
+                    <td>{{ t_cart.book.price }}</td>
+                    <td>{{ t_cart.quantity }}</td>
+                    <td>{{ t_cart.sub_total }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if t_fines %}
+<h3 class="text-center" style="padding: 10px 100px;">
+    <b class="text-white text-uppercase">fines</b>
+</h3>
+<div class="col-md-12">
+    <div class="col-md-12">
+        <div class="card col-md-12 p-2">
+            <table class="table">
+                <thead>
+                <tr class="text-uppercase text-center">
+                    <th><b>no</b></th>
+                    <th><b>name</b></th>
+                    <th><b>card no</b></th>
+                    <th><b>total fine</b></th>
+                    <th><b>paid</b></th>
+                    <th><b>balance</b></th>
+                    <th><b>status</b></th>
+                </tr>
+                </thead>
+                <tbody class="text-uppercase text-center">
+                {% regroup t_fines by patron.name as patron_fines %}
+                {% for patron in patron_fines %}
+                {% with patron.list.0 as t_fine %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ patron.grouper }}</td>
+                    <td>{{ t_fine.patron.card_no }}</td>
+                    <td>{{ t_fine.patron.fine}}</td>
+                    <td>{{ t_fine.patron.paid }}</td>
+                    <td>{{ t_fine.patron.fine }}</td>
+                    <td>
+                        {% if t_fine.patron.fine > 0 %}<i class="text-danger fa fa-xmark"></i>{% else %}<i
+                            class="text-success fa fa-check"></i> {% endif %}
+                    </td>
+                </tr>
+                {% endwith %}
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

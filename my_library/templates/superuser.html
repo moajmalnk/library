@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}MY LIBRARY{% endblock %}
+{% block body %}
+<style>
+
+</style>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-4"></div>
+        {% if user.is_authenticated %}
+        <div class="col-md-4" style="top: 50px;">
+            <div class="card radius-15 l-bg-green">
+                <div class="card-body text-center">
+                    <div class=" radius-15 ">
+                        <h5><b>SUPER ADMIN</b></h5>
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" width="110" height="110"
+                             class="rounded-circle shadow p-1 bg-white" alt="">
+                        <h1 class=" text-white text-uppercase"><b>{{user.username}}</b></h1><br>
+                        <p class="mb-3 text-white text-uppercase "><b>Gmail</b><br> {{user.email}}</p>
+                        <p class="mb-3 text-white text-uppercase "><b>About</b></p>
+                        <h5 class="text-left text-white text-uppercase">HI {{user.username}},</h5>
+                        <p class="mb-3 text-white text-uppercase ">YOU ARE NOW SUPER ADMIN OF MY LIBRARY, KINDLY KEEP
+                            YOUR PASSWORD AND WORK HARD FOR US.</p>
+                        <a href="{% url 'mylibrary:home' %}" class="btn btn-light radius-15">BACK</a>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

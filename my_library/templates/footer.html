@@ -1,0 +1,202 @@
+<footer>
+    <!-- Remove the container if you want to extend the Footer to full width. -->
+    <div class="col-md-12 my-5">
+        <footer class="text-white text-center text-lg-start" style="background-color: #23242a;">
+            <!-- Grid container -->
+            <div class="col-md-12 p-3">
+                <!--Grid row-->
+                <div class="row mt-4">
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+                        <h5 class="text-uppercase mb-4">About library</h5>
+                        <p>
+                            When you visit our my library you can search books what you want it that time you will
+                            get book
+                            then download it.
+                        </p>
+
+                        <p class="text-lowercase">
+                            {% for category in links %}
+                            <i class="text-lowercase">{{ category.name }},</i>
+                            {% endfor %}
+                        </p><br>
+
+                        <div class="mt-4">
+                            <!-- Facebook -->
+                            <a class="btn btn-floating btn-primary btn-lg" type="button"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <!-- Dribbble -->
+                            <a class="btn btn-floating btn-success btn-lg" type="button"><i class="fab fa-whatsapp"></i></a>
+                            <!-- Twitter -->
+                            <a class="btn btn-floating btn-info btn-lg" type="button"><i class="fab fa-twitter"></i></a>
+                            <!-- Google + -->
+                            <a class="btn btn-floating btn-danger btn-lg" type="button"><i
+                                    class="fab fa-google-plus-g"></i></a>
+                            <!-- Linkedin -->
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-6 mb-4 mb-md-1">
+                        <h5 class="text-uppercase mb-4 pb-2">Search Patrons</h5>
+                        <div class="form-outline form-white mb-4">
+                            <form action="{% url 'search_app:patron' %}">
+                                <div class="input-group">
+                                    <input class="form-control form-control-lg" id="formControlLg" name="q" placeholder="Search {{ patron_count }} patrons..." type="text">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-light" type="submit">
+                                            <i class="fa-solid fa-magnifying-glass fa-xl fa-beat"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="form-notch">
+                                <div class="form-notch-leading" style="width: 9px;"></div>
+                                <div class="form-notch-middle" style="width: 48.8px;"></div>
+                                <div class="form-notch-trailing"></div>
+                            </div>
+                        </div>
+                        <ul class="fa-ul" style="margin-left: 1.65em;">
+                            <li class="mb-3">
+                                <span class="fa-li"><i class="fas fa-home"></i></span><span class="ms-2">MALAPPURAM, KERALA 676507, INDIA</span>
+                            </li>
+                            <li class="mb-3">
+                                <span class="fa-li"><i class="fas fa-envelope"></i></span><span class="ms-2">info@mylibrary.com</span>
+                            </li>
+                            <li class="mb-3">
+                                <span class="fa-li"><i class="fas fa-phone"></i></span><span
+                                    class="ms-2">+91 8848676627</span>
+                            </li>
+                            <li class="mb-3">
+                                <span class="fa-li"><i class="fas fa-print"></i></span><span
+                                    class="ms-2">+91 8848676627</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase mb-4">Opening hours</h5>
+                        <table class="table text-center text-white">
+                            <tbody class="font-weight-normal">
+                            <tr>
+                                <td>Monday:</td>
+                                <td>8am - 9pm</td>
+                            </tr>
+                            <tr>
+                                <td>Tuesday:</td>
+                                <td>8am - 9pm</td>
+                            </tr>
+                            <tr>
+                                <td>Wednesday:</td>
+                                <td>8am - 9pm</td>
+                            </tr>
+                            <tr>
+                                <td>Thursday:</td>
+                                <td>8am - 9pm</td>
+                            </tr>
+                            <tr>
+                                <td>Saturday:</td>
+                                <td>8am - 9pm</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--Grid column-->
+                </div>
+                <!--Grid row-->
+            </div>
+            <!-- Grid container -->
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2023 Copyright:
+                <a class="text-white" href="#">mylibrary.com</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+    </div>
+    <!-- End of .container -->
+</footer>
+<div class="mj-column-per-100 mj-outlook-group-fix"
+     style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+    <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+        <tbody>
+        <tr>
+            <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                <div style="font-family:Nunito, Helvetica, Arial, sans-serif;font-size:16px;font-weight:400;line-height:22px;text-align:center;color:#54595f;">
+                    <a href="#" style="color: #54595f; display: inline-block; text-decoration: none;">
+                        <img alt="play-store-logo" src="https://codedmails.com/images/google-play.png" width="150px"/>
+                    </a>
+                    <a href="#" style="color: #54595f; display: inline-block; text-decoration: none;">
+                        <img alt="app-store-logo" src="https://codedmails.com/images/app-store.png" width="150px"/>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div style="margin:0px auto;max-width:600px;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+        <tbody>
+        <tr>
+            <td style="direction:ltr;font-size:0px;padding:20px 0;padding-top:0px;text-align:center;">
+                <div class="mj-column-per-100 mj-outlook-group-fix"
+                     style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;"
+                           width="100%">
+                        <tbody>
+                        <tr>
+                            <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                <div style=" font-family:Nunito, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:18px;text-align:center;color: #000;">
+                                    123 NEW DELHI, INDIA, CA 12345<br/> © 2020 [MYLIBRARY] Inc.
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                <div style="font-family:Nunito, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:18px;text-align:center;color:#000;">
+                                    Update your <a href="https://google.com"
+                                                   style="color: #000; text-decoration: underline;">email
+                                    preferences</a> to choose the types of emails you receive, or you can <a
+                                        href="https://google.com" style="color: #000; text-decoration: underline;">
+                                    unsubscribe </a>from all future emails.
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div style="margin:0px auto;max-width:600px;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+        <tbody>
+        <tr>
+            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                <div class="mj-column-per-100 mj-outlook-group-fix"
+                     style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;"
+                           width="100%">
+                        <tbody>
+                        <tr>
+                            <td style="font-size:0px;word-break:break-word;">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

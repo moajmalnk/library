@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% block body %}
+<title>{% block title %}programs{% endblock %}</title>
+{% if msg %}
+<body>
+<div class="col-md-12">
+    <div class="row">
+        <div class="card col-md-12 l-bg-green">
+            <br>
+            <div class="card bg-light text-center text-dark"><br><h4><b>{{ msg.name }}</b></h4><br></div>
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card-content">
+                            <h4 class="card-title">On<b>:</b></h4>
+                            <p class="text-uppercase">{{ msg.on }}</p>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Location</h4>
+                            <p class="text-uppercase">{{ msg.location }}</p>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Inauguration</h4>
+                            <p class="text-uppercase">{{ msg.inauguration }}</p>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Welcome speech</h4>
+                            <p class="text-uppercase">{{ msg.welcome_speech }}</p>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Presidential Speech</h4>
+                            <p class="text-uppercase">{{ msg.presidential_speech }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-content">
+                            <h4 class="card-title">Greetings</h4>
+                            <p class="text-uppercase">{{ msg.greetings }}</p>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Special Speech</h4>
+                            <p class="text-uppercase">{{ msg.special_speech }}</p>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Speech</h4>
+                            <p class="text-uppercase">{{ msg.speech }}</p>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Song</h4>
+                            <p class="text-uppercase">{{ msg.song }}</p>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Vote of Thanks</h4>
+                            <p class="text-uppercase">{{ msg.vote_of_thanks }}</p>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="" download="img.jpg"><img src="https://assets.stickpng.com/images/580b585b2edbce24c47b276e.png"
+                                                           alt="Image" class="img-fluid" height="300px"
+                                                           width="300px"></a>
+                        <div class="card-content text-center">
+                            <a href="{% url 'search_app:delete_notify' msg.id %}" class="btn btn-danger">DELETE</a>
+                            &nbsp;
+                            <a href="{% url 'search_app:update_notify' msg.id %}" class="btn btn-info">UPDATE</a>
+                            &nbsp;<br><br>
+                            <a href="{% url 'search_app:download_page' msg.id %}" class="btn btn-secondary" download>DOWNLOAD</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% else %}
+<body>
+<div class="col-md-12">
+    <div class="row">
+        {% for all_msg in all_msg %}
+        <div class="card col-md-12 l-bg-green">
+            <br>
+            <div class="card bg-light text-center text-dark"><br><h4><b>{{ all_msg.name }}</b></h4><br></div>
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card-content">
+                            <h4 class="card-title">On<b>:</b></h4>
+                            <p class="text-uppercase">{{ all_msg.on }}</p>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Location</h4>
+                            <p class="text-uppercase">{{ all_msg.location }}</p>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Inauguration</h4>
+                            <p class="text-uppercase">{{ all_msg.inauguration }}</p>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Welcome speech</h4>
+                            <p class="text-uppercase">{{ all_msg.welcome_speech }}</p>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Presidential Speech</h4>
+                            <p class="text-uppercase">{{ all_msg.presidential_speech }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-content">
+                            <h4 class="card-title">Greetings</h4>
+                            <p class="text-uppercase">{{ all_msg.greetings }}</p>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Special Speech</h4>
+                            <p class="text-uppercase">{{ all_msg.special_speech }}</p>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Speech</h4>
+                            <p class="text-uppercase">{{ all_msg.speech }}</p>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Song</h4>
+                            <p class="text-uppercase">{{ all_msg.song }}</p>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Vote of Thanks</h4>
+                            <p class="text-uppercase">{{ all_msg.vote_of_thanks }}</p>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="" download="img.jpg"><img src="https://assets.stickpng.com/images/580b585b2edbce24c47b276e.png"
+                                                           alt="Image" class="img-fluid" height="300px"
+                                                           width="300px"></a>
+                        <div class="card-content text-center">
+                            <a href="{% url 'search_app:delete_notify' all_msg.id %}" class="btn btn-danger">DELETE</a>
+                            &nbsp;
+                            <a href="{% url 'search_app:update_notify' all_msg.id %}" class="btn btn-info">UPDATE</a>
+                            &nbsp;<br><br>
+                            <a href="{% url 'search_app:download_page' all_msg.id %}" class="btn btn-secondary" download>DOWNLOAD</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+{% endif %}
+{% endblock %}

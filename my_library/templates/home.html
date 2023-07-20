@@ -1,0 +1,312 @@
+{% extends 'base.html' %}
+{% block body %}
+<title xmlns="http://www.w3.org/1999/html">{% block title %}my library{% endblock %}</title>
+<style>
+    .break-line {
+      word-wrap: break-word;
+      width: 170px; /* Adjust the width as needed */
+    }
+     #loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    /* CSS styles for the loading animation */
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 8px solid #000;
+      border-top: 8px solid #f3f3f3;
+      border-radius: 50%;
+      animation: spin 1.5s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+
+
+
+
+</style>
+<div id="loading-overlay">
+    <div class="loader"></div>
+</div>
+<br><br>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 " style="width: 100%; max-width: 600px; background: #eee;
+                display: flex; border: 2px solid #0a294e; align-items: center;
+                border-radius: 600px; padding: 5px 20px; backdrop-filter: blur(4px) saturate(180%);
+                width: 800px; float: center; margin: 1px 6%;">
+            <div>
+                <form action="{% url 'search_app:search' %}" class="">
+                    <input aria-label="Search" class="" name="q" placeholder="Search {{ book_count }} books..."
+                           type="search" style="background: #eee;
+                flex: 1; border: 0; outline: none; padding: 6px 1px;
+                font-size: 20px; color: #cac7fff; margin:18px 80px;
+                display: inline-block; width: 240px; float: left; margin-bottom: 20px;">
+                    <button class="btn btn-light" type="submit" style="width: 60px;
+                border: 0; border-radius: 50%; height: 60px;
+                background: #eee; cursor: pointer; margin:10px 2px;
+                padding:0px; text-align:center; align:center;">
+                        <i class="fa-solid fa-magnifying-glass fa-xl fa-beat"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><br><br>
+<style>
+    {% for book in book %}
+    .book-color-{{ forloop.counter }} {
+        background-color: {% cycle '#FF3366' '#FF9900' '#FFCC00' '#66CC00' '#00CCCC' '#3399FF' '#9933FF' '#FF33CC' '#FF6666' '#FFCC99' '#99CC99' '#66CCCC' %};
+    }
+    {% endfor %}
+    {% for book in links %}
+    .category-color-{{ forloop.counter }} {
+        background-color: {% cycle '#FF3366' '#FF9900' '#FFCC00' '#66CC00' '#00CCCC' '#3399FF' '#9933FF' '#FF33CC' '#FF6666' '#FFCC99' '#99CC99' '#66CCCC' %};
+    }
+    {% endfor %}
+
+
+</style>
+<div class="container">
+    <div class="row">
+        {% for category in links %}
+        <a href="{{ category.get_url }}" style="color: #0e3058;">
+            <div class="col-lg-2">
+                <a href="{{ category.get_url }}" style="color: #0e3058; text-decoration: none;" class="text-dark">
+                    <div class="card category-color-{{ forloop.counter }}" style="border-bottom: 5px solid black;">
+                        <br>
+                        <i class="text-center fa fa-book fa-2xl"></i>
+                        <div class="card-body">
+                            <p class="card-title text-center text-uppercase">{{ category.name }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="row">
+        {% for book in book %}
+        <div class=" col-md-1"><br>
+            <a class="text-dark" href="{% url 'mylibrary:detail' book.id %}" style="text-decoration: none;">
+            <div style="border-radius: 10px;" class=" text-center radius:20px book-color-{{ forloop.counter }}">
+                <b>{{book.primary_number}}</b>
+            </div>
+            <div class="text-center">
+                <img alt="{{ book.name }}" class="card-img"
+                 src="https://creazilla-store.fra1.digitaloceanspaces.com/emojis/48096/orange-book-emoji-clipart-md.png"
+                 style="border-radius: 20px; height:200px; width: 180px;">
+            </div>
+            </a>
+        </div>
+            <div class="card col-md-2 text-center">
+                <div class="card-body">
+                    <h6 class="card-title text-uppercase"><i>{{ book.name }}</i></h6>
+                    <p class="card-text text-uppercase">( {{ book.author }} )</p>
+                    <p class="card-text text-uppercase text-left">CATEGORY: {{ book.category.name }} </p>
+                    <p class="card-text text-uppercase text-left">LANGUAGE: {{ book.lang }}</p>
+                    <p class="card-text text-uppercase text-left">PRICE: <i class="fa fa-rupee"></i> {{ book.price }}
+                    </p>
+                    <a class="btn btn-success" href="{% url 'mylibrary:detail' book.id %}">
+                        More <i class="fa-sharp fa-solid fa-angles-right"></i>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="col-md-12" style="top: 50px;">
+    <div class="row ">
+        <div class="col-xl-3 col-lg-6">
+            <a href="{% url 'search_app:history' %}?type=fines" style="text-decoration: none;">
+            <div class="card l-bg-green text-white">
+                <div class="card-statistic-3 p-5">
+                    <div class="card-icon card-icon-large"><i class="fas fa-rupee"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0 text-center"><b>FINES</b></h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    <i class="fas fa-rupee"></i> {{ total_patron_fine }}
+                                </h2>
+                            </div>
+                            <div class="col-4 text-right">
+                                <span>{{percentage_fine}}% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1" data-height="8" style="height: 8px;">
+                            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar l-bg-cyan"
+                                 data-width="25%" role="progressbar" style="width: {{percentage_fine}}%;">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <a href="{% url 'search_app:history' %}?type=patrons" style="text-decoration: none;">
+            <div class="card bg-primary text-white">
+                <div class="card-statistic-3 p-5">
+                    <div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
+                    <div class="mb-4">
+                        <h5 class="card-title mb-0"><b>PATRONS</b></h5>
+                    </div>
+                    <div class="row align-items-center mb-2 d-flex">
+                        <div class="col-8">
+                            <h2 class="d-flex align-items-center mb-0">
+                                {{ patron_count }}K
+                            </h2>
+                        </div>
+                        <div class="col-4 text-right">
+                            <span>{{ patron_percentage }}% <i class="fa fa-arrow-up"></i></span>
+                        </div>
+                    </div>
+                    <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="30"
+                             class="progress-bar l-bg-green" data-width="30%" role="progressbar"
+                             style="width: {{ patron_percentage }}%;"></div>
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+        <div class="col-xl-3 col-lg-6 text-center">
+            <a href="{% url 'search_app:superuser' %}" style="text-decoration: none;">
+                <div class="card bg-danger text-white">
+                    <div class="card-statistic-3 p-5">
+                        <div class="card-icon card-icon-large"><i class="fas fa-user"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0 text-center"><b>SUPER ADMIN</b></h5>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <h5 class="text-uppercase text-center">
+                                {% if user.is_authenticated %}
+                                {{ user.username }}(main)
+                                {% endif %}
+                            </h5>
+                        </div>
+                        <div class="col-12 text-center">
+                            {% for patron in patrons %}
+                            <h6>
+                                <b>
+                                    {% if user.is_authenticated and user.email == patron.gmail %}
+                                    {{ patron.card_no }}
+                                    {% endif %}
+                                </b>
+                            </h6>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <a href="{% url 'search_app:history' %}?type=issued_books" style="text-decoration: none;">
+            <div class="card l-bg-orange">
+                <div class="card-statistic-3 p-5">
+                    <div class="card-icon card-icon-large"><i class="fas fa-book"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0 text-center"><b>ISSUED BOOKS</b></h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    {{t_issued_books_count}}K
+                                </h2>
+                            </div>
+                            <div class="col-4 text-right">
+                                <span>{{t_issued_books_count}}% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1" data-height="8" style="height: 8px;">
+                            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar l-bg-orange"
+                                 data-width="50%" role="progressbar" style="width: {{t_issued_books_count}}%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<br>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="background: white">
+                <h2 class=" text-center" style="padding:15px"><b>MYLIBRARY</b></h2>
+                <div class="card-body">
+                    <p>
+                        Hi How Are You ?<br><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The word library is derived from a French word "Librairie";
+                        Latin "liber" = book. The library plays an important role in our academic and social lives.
+                        Library is an organized collection of information resources made accessible to a defined
+                        community for reference or borrowing and this collection of information may be in the form of
+                        books, newspapers, CD’s, journals and research papers etc. library provides us physical or
+                        digital access to material, and may be a physical building or room, or a virtual space, or both
+                        containing collection of informative material.
+                        <br><br>
+                    <div class="text-center">
+                        <b class="text-center">Now Available Categories</b>
+                        <hr style="background: #000">
+                        {% for category in links %}
+                        <i class="text-uppercase">{{ category.name }},</i>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mx-auto">
+    {% if paginator.num_pages > 1 %}
+    <div class="text-center">
+        <br>
+        {% if book.has_previous %}
+        <a class="btn btn-secondary btn-lg" href="?page={{ book.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        {% for pg in book.paginator.page_range %}
+        <a class="btn btn-dark btn-lg {% if book.number == pg %} active {% endif %}" href="?page={{ pg }}">{{ pg }}</a>
+        {% endfor %}
+
+        {% if book.has_next %}
+        <a class="btn btn-secondary btn-lg" href="?page={{ book.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+<script>
+    // JavaScript function to hide the loading screen overlay
+    function hideLoadingScreen() {
+      var loadingOverlay = document.getElementById('loading-overlay');
+      loadingOverlay.style.display = 'none';
+    }
+
+    // Set a 30-second timeout to hide the loading screen even if the page hasn't finished loading
+    setTimeout(hideLoadingScreen, 1000);
+
+
+
+
+
+</script>
+{% endblock %}

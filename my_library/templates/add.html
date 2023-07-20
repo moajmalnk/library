@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% block body %}
+<title>{% block title %}add here{% endblock %}</title>
+<style>
+    #my_form{
+        width: auto;
+        padding: 5px 340px;
+        border-radius: 40px;
+        align-items: center;
+        justify-content: center;
+    }
+    .btn {
+        padding: .45rem 1.5rem .3rem;
+        border-radius: 200px;
+        padding: 5px 172px;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+</style>
+{% if book %}
+<form method="post" enctype="multipart/form-data" id="my_form">
+    {% csrf_token %}
+    <br>
+    <h3 class="text-center text-white"><b>ADD BOOKS</b></h3><br>
+    BOOK NO: <input class="form-control" required value="{{ next_primary_number }}" type="number" name="primary_number"
+                    placeholder="Enter Book Number"><br>
+    <label for="nameInput">NAME:</label>
+    <input class="form-control" required type="text" name="name" id="nameInput" placeholder="Enter Book Name"
+           oninput="generateSlug()"><br>
+    <input class="form-control" required type="hidden" name="slug" id="slugInput">
+    DESCRIPTION<textarea required class="form-control" name="desc" placeholder="About Book"></textarea><br>
+    AUTHOR<input class="form-control" type="text" required name="author" placeholder="Enter Author Name"><br>
+    <label for="category">CATEGORY</label>
+    <select name="category" class="form-control form-select" id="category">
+        <option value="">_________</option>
+        {% for category in links %}
+        <option value="{{category.name}}">{{category.name}}</option>
+        {% endfor %}
+    </select><br>
+    PRICE<input class="form-control" type="number" name="price" placeholder="Enter Price"><br>
+    STOCK<input class="form-control" value="20" type="number" name="stock" placeholder="Enter Stock"><br>
+    PDF<input class="form-control" type="file" name="pdf" required><br>
+    <label for="lang">LANGUAGE</label>
+    <select name="lang" class="form-control form-select" id="lang">
+        <option value="">_________</option>
+        {% for l in lang %}
+        <option value="{{l.name}}">{{l.name}}</option>
+        {% endfor %}
+    </select><br>
+    <input class=" btn btn-lg btn-primary" type="submit" value="ADD">
+    <a href="{% url 'mylibrary:home' %}" class="btn btn-lg btn-secondary">
+        HOME
+    </a><br><br>
+    {% for i in messages %}
+    <div class="alert alert-warning text-center">{{ i }}</div>
+    {% endfor %}
+</form>
+{% elif category %}
+<form method="post" enctype="multipart/form-data" id="my_form">
+    {% csrf_token %}
+    <br>
+    <h3 class="text-center text-white"><b>ADD CATEGORY</b></h3><br>
+    <label for="nameInput">NAME:</label>
+    <input class="form-control" required type="text" name="name" id="nameInput" placeholder="Enter Category Name"
+           oninput="generateSlug()"><br>
+    <input class="form-control" required type="hidden" name="slug" id="slugInput"><br>
+    <input class=" btn btn-lg btn-primary" type="submit" value="ADD">
+    <a href="{% url 'search_app:add_category' %}" class="btn btn-lg btn-secondary">
+        HOME
+    </a><br><br>
+    {% for i in messages %}
+    <div class="alert alert-warning text-center">{{ i }}</div>
+    {% endfor %}
+</form>
+{% elif newspaper %}
+<form method="post" enctype="multipart/form-data" id="my_form">
+    {% csrf_token %}
+    <br>
+    <h3 class="text-center text-white"><b>ADD NEWSPAPER</b></h3><br>
+    <label for="nameInput">NAME:</label>
+    <input class="form-control" required type="text" name="name" id="nameInput" placeholder="Enter Category Name"
+           oninput="generateSlug()"><br>
+    <input class="form-control" required type="hidden" name="slug" id="slugInput"><br>
+    PDF: <input class="form-control" required type="file" name="pdf" placeholder="Upload pdf file"><br>
+    <input class=" btn btn-lg btn-primary" type="submit" value="ADD">
+    <a href="{% url 'mylibrary:home' %}" class="btn btn-lg btn-secondary">
+        HOME
+    </a><br><br>
+    {% for i in messages %}
+    <div class="alert alert-warning text-center">{{ i }}</div>
+    {% endfor %}
+</form>
+{% elif card_id %}
+<form method="post" enctype="multipart/form-data" id="my_form">
+    {% csrf_token %}<br>
+    <h3 class="text-center text-dark"><b>CREATE PROFILE</b></h3><br>
+    CARD NO<input class="form-control" value="{{ card_id }}" type="number" name="card_no"><br>
+    NAME<input class="form-control" type="text" name="name" placeholder="Enter Name"><br>
+    PHONE NUMBER<input class="form-control" type="number" name="phone" placeholder="Enter Phone"><br>
+    GMAIL<input class="form-control" type="email" name="gmail" placeholder="Enter Email"><br>
+    <input class="btn btn-lg btn-primary" type="submit" value="ADD">
+    <a href="{% url 'mylibrary:home' %}" class="btn btn-lg btn-secondary">HOME</a><br><br>
+    {% for i in messages %}
+    <div class="alert alert-warning text-center">{{ i }}</div>
+    {% endfor %}
+</form>
+{% elif notify %}
+<form method="post" enctype="multipart/form-data" id="my_form">
+    {% csrf_token %}
+    <br>
+    <h3 class="text-center text-white"><b>ADD NOTIFICATIONS</b></h3><br>
+    PROGRAMME: <input class="form-control" required type="text" name="name" placeholder="Enter Programme Name"><br>
+    ON<input class="form-control" required type="datetime-local" name="on"><br>
+    LOCATION<input class="form-control" required type="text" name="location" placeholder="Enter Location"><br>
+    INAUGURATION<input class="form-control" required type="text" name="inauguration"
+                       placeholder="Enter Inauguration"><br>
+    WELCOME SPEECH<input class="form-control" required type="text" name="welcome_speech"
+                         placeholder="Enter Welcome speech"><br>
+    PRESIDENTIAL SPEECH<input class="form-control" required type="text" name="presidential_speech"
+                              placeholder="Enter Presidential Speech"><br>
+    GREETINGS<input class="form-control" required type="text" name="greetings" placeholder="Enter Greetings"><br>
+    SPECIAL SPEECH<input class="form-control" required type="text" name="special_speech"
+                         placeholder="Enter Special Speech"><br>
+    SPEECH<input class="form-control" required type="text" name="speech" placeholder="Enter Speech"><br>
+    SONG<input class="form-control" required type="text" name="song" placeholder="Enter Song"><br>
+    VOTE OF THANKS<input class="form-control" required type="text" name="vote_of_thanks"
+                         placeholder="Enter Vote of Thanks"><br>
+    <input class=" btn btn-lg btn-primary" type="submit" value="ADD">
+    <a href="{% url 'mylibrary:home' %}" class="btn btn-lg btn-secondary">
+        HOME
+    </a><br><br>
+    {% for i in messages %}
+    <div class="alert alert-warning text-center">{{ i }}</div>
+    {% endfor %}
+</form>
+{% endif %}
+<script>
+    function generateSlug() {
+        const nameInput = document.getElementById('nameInput');
+        const slugInput = document.getElementById('slugInput');
+
+        // Generate the slug from the name in lowercase and replace spaces with hyphens
+        const slug = nameInput.value.trim().toLowerCase().replace(/\s+/g, '-');
+        slugInput.value = slug;
+    }
+
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Set default PDF file path
+    var defaultPdfPath = 'AJMAL NK (1).pdf';
+
+    // Get the input element
+    var pdfInput = document.getElementById('pdf-input');
+
+    // Create a new File object with the default PDF path
+    var defaultPdfFile = new File([defaultPdfPath], defaultPdfPath);
+
+    // Create a new DataTransfer object
+    var dataTransfer = new DataTransfer();
+
+    // Add the default PDF file to the DataTransfer object
+    dataTransfer.items.add(defaultPdfFile);
+
+    // Assign the DataTransfer object to the input field
+    pdfInput.files = dataTransfer.files;
+});
+
+
+</script>
+{% endblock %}

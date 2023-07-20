@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block body %}
+<title>{% block title %}delete{% endblock %}</title>
+<form method="post">
+    {% csrf_token %}
+    <div class="container">
+        <br><br><br><br>
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                {% if book %}
+                <h4 class="text-center text-uppercase">ARE YOU WANT TO DELETE <br><b>{{book.name}}</b> ?</h4><br>
+                {% elif category %}
+                <h4 class="text-center text-uppercase">ARE YOU WANT TO DELETE <br><b>{{category.name}}</b> ?</h4><br>
+                {% elif newspaper %}
+                <h4 class="text-center text-uppercase">ARE YOU WANT TO DELETE <br><b>{{newspaper.name}}</b> ?</h4><br>
+                {% elif notify %}
+                <h4 class="text-center text-uppercase">ARE YOU WANT TO DELETE <br><b>{{notify.name}}</b> ?</h4><br>
+                {% else %}
+                <h4 class="text-center text-uppercase">ARE YOU WANT TO DELETE <br><b>{{patron.name}}</b> ?</h4><br>
+                {% endif %}
+                <input class="form-control btn btn-lg btn-danger" type="submit" value="DELETE">
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

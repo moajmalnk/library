@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block title %}Issue Book{% endblock %}
+
+{% block body %}
+
+{% load custom_filters %}
+
+<div class="button-group text-center">
+    <div class="col-md-11">
+        <div class="row">
+            <div class="col-md-2">
+                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Image"
+                     class="img-fluid" style="height: 250px; width: 300px; border-radius: 500px;">
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-8 offset-md-3">
+                        <h3 class="text-center" style="padding: 10px 100px;">
+                            <b class="text-white text-uppercase">Issue Books</b>
+                        </h3>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="primary_number">Enter Book Primary Number:</label>
+                                <select name="primary_number" class="form-control form-select" id="primary_number" required>
+                                    <option value="">_________</option>
+                                    {% for i in cbook %}
+                                        {% if not i.is_issued %}
+                                            <option value="{{ i.primary_number }}">
+                                                {{ i.name }} ({{ i.primary_number }})
+                                            </option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">ISSUE BOOK</button><br>
+                            {% for i in messages %}
+                                <div class="alert alert-info">{{ i }}</div>
+                            {% endfor %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="card col-md-2 text-center text-uppercase mb-6"><br>
+                <h3><b>{{ patron.name }}</b></h3><br>
+                <h6>Card No:</h6>
+                <h5 style="color: #000;">{{ patron.card_no }}</h5>
+                <h6>Phone Number:</h6>
+                <h5 style="color: #000;">{{ patron.phone }}</h5>
+                <h6>Email:</h6>
+                <h5 style="color: #000;" class="text-lowercase">{{ patron.gmail }}</h5>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="card col-md-8 p-2">
+                {% if patron %}
+                    <table class="table">
+                        <thead>
+                            <tr class="text-uppercase text-center">
+                                <th><b>Book Name</b></th>
+                                <th><b>Issued To</b></th>
+                                <th><b>ISSUE DATE</b></th>
+                                <th><b>RETURN DATE</b></th>
+                                <th><b>ACTION</b></th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-uppercase text-center">
+                            {% for book in issued_books %}
+                                <tr>
+                                    <td>{{ book.book }}</td>
+                                    <td>{{ book.patron }}</td>
+                                    <td>{{ book.issue_date }}</td>
+                                    <td>{{ book.return_date }}</td>
+                                    <td>
+                                        {% if not book.is_issued %}
+                                            {% if book.renewal_count >= 2 %}
+                                                {% if book.returned %}
+                                                    <p>poda returned</p>
+                                                {% else %}
+                                                    <a href="{% url 'search_app:return_patron' patron.id %}" class="btn btn-sm btn-success">RETURN</a>
+                                                {% endif %}
+                                            {% else %}
+                                                <a href="{% url 'search_app:renew_patron' book.id %}" class="btn btn-sm btn-dark">RENEW</a>
+                                            {% endif %}
+                                        {% else %}
+                                            <a href="{% url 'search_app:renew_patron' book.id %}" class="btn btn-sm btn-dark">RENEW</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {% if issued_books %}
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="text-center">
+                                    <a href="{% url 'search_app:renew_all_books' patron.id %}" class="btn btn-lg btn-success">Renew All Books</a>
+                                    <a href="{% url 'search_app:return_all_books' patron.id %}" class="btn btn-lg btn-danger">Return All Books</a>
+                                    {% if patron.fine > 0 %}
+                                    <a href="{% url 'search_app:pay_all_fine' patron.id %}" class="btn btn-lg btn-warning">Pay All Fine</a>
+                                    {% endif %}
+                                    <a href="{% url 'search_app:return_patron' patron.id %}" class="btn btn-lg btn-primary">Return Book</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% else %}
+                    <p class="text-uppercase text-center" style="margin: 150px">No books issued for this patron.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+{% endblock %}

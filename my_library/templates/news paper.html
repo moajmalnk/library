@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block body %}
+<title>{% block title %}my library{% endblock %}</title>
+<style>
+.newspaper-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.newspaper-card {
+  flex: 0 0 calc(33.33% - 20px);
+  margin: 10px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.newspaper-card a {
+  text-decoration: none;
+  color: #333;
+}
+
+.newspaper-card img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.newspaper-card h4 {
+  margin-top: 10px;
+}
+
+
+</style>
+<div class="col-md-12">
+    <div class="row">
+        {% for news in newspaper %}
+        <div class="col-md-3 p-1">
+            <div class="cards">
+                <div class="newspaper-card align-items-center">
+                    <a href="{{ news.pdf.url }}" target="_blank">
+                        <img src="https://static.vecteezy.com/system/resources/previews/012/665/107/original/simple-cartoon-illustration-of-an-open-newspaper-office-concept-vector.jpg"
+                             alt="{{ news.name }}"><br><br>
+                        <h4 class="text-uppercase"><b>{{ news.name }} [ 0{{ forloop.counter }} ]</b></h4>
+                    </a><br><br>
+                    <a href="{{ news.pdf.url }}" class="btn btn-info text-white"><b>READ</b></a>
+                    <a href="{{ news.pdf.url }}" class="btn btn-success text-white" download><b>DOWNLOAD </b></a><br><br>
+                    <a href="{% url 'search_app:delete_newspaper' news.id %}" class="btn btn-secondary text-white"><b>DELETE </b></a>
+                    <a href="{% url 'search_app:update_news' news.id %}" class="btn btn-warning text-white"><b>UPDATE</b></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

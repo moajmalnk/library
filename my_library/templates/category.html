@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block title %}
+{% if category %}
+{{category.name}}
+{% else %}
+my library
+{% endif %}
+{% endblock %}
+{% block body %}
+{% endblock %}
+{% block metadescription %}
+{% if category %}
+<style>
+    {% for book in books %}
+    .category-color-{{ forloop.counter }} {
+        background-color: {% cycle '#FF3366' '#FF9900' '#FFCC00' '#66CC00' '#00CCCC' '#3399FF' '#9933FF' '#FF33CC' '#FF6666' '#FFCC99' '#99CC99' '#66CCCC' %};
+    }
+    {% endfor %}
+</style>
+<br>
+<h1 class="text-center text-dark text-uppercase">
+    {{ category.name|truncatewords:155 }} CATEGORY
+</h1>
+{% else %}
+<br>
+<h1 class="text-center text-dark text-uppercase">
+    ALL CATEGORIES
+</h1>
+{% endif %}
+<style>
+    {% for book in books %}
+    .category-color-{{ forloop.counter }} {
+        background-color: {% cycle '#FF3366' '#FF9900' '#FFCC00' '#66CC00' '#00CCCC' '#3399FF' '#9933FF' '#FF33CC' '#FF6666' '#FFCC99' '#99CC99' '#66CCCC' %};
+    }
+    {% endfor %}
+.source-1 {
+  src: 'https://bootdey.com/img/Content/avatar/avatar7.png';
+}
+
+.source-2 {
+  src: 'https://bootdey.com/img/Content/avatar/avatar6.png';
+}
+</style>
+<br><br>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 " style="width: 100%; max-width: 600px; background: #eee;
+                display: flex; border: 2px solid #0a294e; align-items: center;
+                border-radius: 600px; padding: 5px 20px; backdrop-filter: blur(4px) saturate(180%);
+                width: 800px; float: center; margin: 1px 6%;">
+            <div>
+                <form action="{% url 'search_app:search' %}" class="">
+                    <input aria-label="Search" class="" name="q" placeholder="Search {{ book_count }} books..."
+                           type="search" style="background: #eee;
+                flex: 1; border: 0; outline: none; padding: 6px 1px;
+                font-size: 20px; color: #cac7fff; margin:18px 80px;
+                display: inline-block; width: 240px; float: left; margin-bottom: 20px;">
+                    <button class="btn btn-light" type="submit" style="width: 60px;
+                border: 0; border-radius: 50%; height: 60px;
+                background: #eee; cursor: pointer; margin:10px 2px;
+                padding:0px; text-align:center; align:center;">
+                        <i class="fa-solid fa-magnifying-glass fa-xl fa-beat"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><br><br>
+<div class="col-md-12">
+    <div class="row">
+        {% for book in books %}
+        <div class=" col-md-1"><br>
+            <div style="border-radius: 10px;" class=" text-center radius:20px category-color-{{ forloop.counter }}">
+                <b>{{book.primary_number}}</b>
+            </div>
+            <img alt="{{ book.name }}" class="card-img"
+                 src="https://creazilla-store.fra1.digitaloceanspaces.com/emojis/48096/orange-book-emoji-clipart-md.png"
+                 style="border-radius: 20px; height:200px; width: 180px;">
+        </div>
+        <a class="text-dark" href="{% url 'mylibrary:detail' book.id %}" style="text-decoration: none;">
+            <div class="card col-md-2 text-center">
+                <div class="card-body">
+                    <h6 class="card-title text-uppercase"><b>{{ book.name }}</b></h6>
+                    <p class="card-text text-uppercase">({{ book.author }} )</p>
+                    <p class="card-text text-uppercase text-left">CATEGORY: {{ book.category.name }} </p>
+                    <p class="card-text text-uppercase text-left">LANGUAGE: {{ book.lang }}</p>
+                    <p class="card-text text-uppercase text-left">PRICE: <i class="fa fa-rupee"></i> {{ book.price }}</p>
+                    <a class="btn btn-primary" href="{% url 'mylibrary:detail' book.id %}">
+                        More <i class="fa-sharp fa-solid fa-angles-right"></i>
+                    </a>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+<br>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="background: white">
+                <h2 class=" text-center" style="padding:15px"><b>MYLIBRARY</b></h2>
+                <div class="card-body">
+                    <p>
+                        Hi How Are You ?<br><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The word library is derived from a French word "Librairie";
+                        Latin "liber" = book. The library plays an important role in our academic and social lives.
+                        Library is an organized collection of information resources made accessible to a defined
+                        community for reference or borrowing and this collection of information may be in the form of
+                        books, newspapers, CD’s, journals and research papers etc. library provides us physical or
+                        digital access to material, and may be a physical building or room, or a virtual space, or both
+                        containing collection of informative material.
+                        <br><br>
+                    <div class="text-center">
+                        <b class="text-center">Now Available Categories</b>
+                        <hr style="background: #000">
+                        {% for category in links %}
+                        <i class="text-uppercase">{{ category.name }},</i>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

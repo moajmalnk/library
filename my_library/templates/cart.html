@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+CART
+{% endblock %}
+
+<style>
+    .card-radius {
+        border-radius: 5px;
+    }
+
+
+</style>
+
+{% block body %}
+<div class="card card-radius col-xl-12" style="border-radius: 1px;">
+    <div class="row">
+        <div class="col-md-12">
+            {% if not cart_items %}
+            <div>
+                <div class="text-center">
+                    <br>
+                    <h1 class="text-center my_title"> YOUR SHOPPING CART IS EMPTY</h1><br>
+                    <p>PLEASE CLICK <a href="{% url 'mylibrary:all_book_category' %}"> HERE</a> TO CONTINUE SHOPPING</p>
+                </div>
+            </div>
+            {% else %}
+            <div>
+                <div class="text-center">
+                    <br>
+                    <h1 class="text-center my_title text-white"><b>YOUR SHOPPING CART</b></h1><br>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% if cart_items %}
+        <div class="col-md-6">
+            <div class="text-center"><br>
+                <h4><b>YOUR ITEMS</b></h4>
+                <hr>
+                {% for cart_item in cart_items %}
+                <div class="col-md-1"><br><br>
+                    <a href="{{ cart_item.book.get_absolute_url }}"><img
+                            src="https://assets.stickpng.com/images/580b585b2edbce24c47b276e.png"
+                            class="float-left rounded custom_image" width="120px"
+                            height="150px"></a>
+                </div>
+                <div class="d-flex align-items-left">
+                    <div class="card col-md-11 float-left text-center"><br>
+                        <p><b>BOOK NAME:</b> {{ cart_item.book.name }}</p>
+                        <p><b>PRICE:</b> ${{ cart_item.book.price }}</p>
+                        <p><b>QUANTITY:</b> {{ cart_item.quantity }} x ${{ cart_item.book.price }}</p>
+                        <p><b>TOTAL:</b> ${{ cart_item.sub_total }}</p>
+                    </div>
+                    {% if cart_item.quantity < cart_item.book.stock %}
+                    <div class="button-group card col-md-1 "><br><br>
+                        <a href="{% url 'cart:add_cart' cart_item.book.id %}" class="text-success"><i
+                                class="fa-sharp fa-solid fa-square-plus fa-xl"></i></a><br><br>
+                        <a href="{% url 'cart:cart_remove' cart_item.book.id %}" class="text-dark"><i
+                                class="fa-sharp fa-solid fa-square-minus fa-xl"></i></a><br><br>
+                        <a href="{% url 'cart:full_remove' cart_item.book.id %} " class="text-danger"><i
+                                class="fa-sharp fa-solid fa-trash fa-xl"></i></a>
+                    </div>
+                    {% else %}
+                    <div class="button-group">
+                        <a href="{% url 'cart:cart_remove' cart_item.book.id %}" class="text-dark"><i
+                                class="fa-sharp fa-solid fa-square-minus fa-lg"></i></a><br><br><br>
+                        <a href="{% url 'cart:full_remove' cart_item.book.id %}" class="text-danger"><i
+                                class="fa-sharp fa-solid fa-trash fa-2xl"></i></a>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <div class="col-md-6">
+            <div class="text-center"><br>
+                <h4><b>CHECKOUT</b></h4>
+                <hr>
+                <div class="text-center"><br><br>
+                    PLEASE REVIEW YOUR SHOPPING CART ITEMS BEFORE PROCEEDING WITH THE ORDER PAYMENT.
+                </div>
+                <hr>
+                <div class="text-left">
+                    <h4>NET TOTAL = <strong>&nbsp; <i class="fas fa-rupee"></i> {{ total }}/-</strong></h4><br><br>
+                </div>
+                <div class="col-md-12">
+                    <a style="border-radius: 15px 50px 30px;" href="{% url 'mylibrary:all_book_category' %}"
+                       class="btn btn-dark btn-lg">CONTINUE SHOPPING</a>
+                    <a style="border-radius: 15px 50px 30px;"
+                       class="btn btn-success btn-lg text-white" data-toggle="modal" data-target="#message-modal">PROCEED
+                        TO PAY </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="message-modal" tabindex="-1" role="dialog" aria-labelledby="message-modal-title"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="message-modal-title">MY LIBRARY</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>HELLO, PLEASE PAY YOUR AMOUNT - <b><i class="fas fa-rupee"></i> {{ total }}</b></p>
+            </div>
+            <div class="modal-footer">
+                <form action="{% url 'cart:clear_cart' %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">PAY</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Include the necessary JavaScript files -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+{% endblock %}

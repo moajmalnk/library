@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+</head>
+<body>
+{% include 'nav.html' %}
+{% block body %}
+{% endblock %}
+{% block metadescription %}
+{% endblock %}
+{% include 'footer.html' %}
+</body>
+</html>
